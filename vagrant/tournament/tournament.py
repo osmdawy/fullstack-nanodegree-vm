@@ -70,14 +70,7 @@ def playerStandings():
     c = conn.cursor()
     # I've used this link to make condition on count
     # http://stackoverflow.com/questions/1400078/is-it-possible-to-specify-condition-in-count
-    c.execute("""Select players.id, players.name,
-        count(case matches.winner when players.id
-        then 1 else null end) as wins,
-        count(matches.winner = players.id or
-        matches.loser = players.id) as matches
-        from players left join matches
-        on (players.id = matches.winner or players.id = matches.loser)
-        group by players.id order by wins desc""")
+    c.execute("""Select * from standings""")
     result = c.fetchall()
     conn.close()
     return result
