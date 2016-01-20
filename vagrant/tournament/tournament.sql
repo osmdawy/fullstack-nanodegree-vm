@@ -9,7 +9,7 @@
 
 CREATE DATABASE tournament;
 \c tournament;
-CREATE TABLE players(id serial PRIMARY KEY,name text,wins numeric DEFAULT 0);
-CREATE TABLE matches(winner serial REFERENCES players(id), loser serial REFERENCES players(id));
+CREATE TABLE players(id serial PRIMARY KEY,name text);
+CREATE TABLE matches(winner serial REFERENCES players(id), loser serial REFERENCES players(id),PRIMARY KEY(winner,loser));
 
 
