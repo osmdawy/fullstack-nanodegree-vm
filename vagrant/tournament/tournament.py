@@ -126,5 +126,5 @@ def swissPairings():
             (standings[i][0], standings[i][1],
              standings[i+1][0], standings[i+1][1]))
         i = i+2  # beacuse each row contains two players
-
+    conn.close()
     return result
