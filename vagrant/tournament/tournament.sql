@@ -11,5 +11,9 @@ CREATE DATABASE tournament;
 \c tournament;
 CREATE TABLE players(id serial PRIMARY KEY,name text);
 CREATE TABLE matches(winner serial REFERENCES players(id), loser serial REFERENCES players(id),PRIMARY KEY(winner,loser));
+CREATE VIEW standings as Select players.id, players.name,count(case matches.winner when players.id then 1 else null end) as wins,
+        count(matches.winner = players.id or matches.loser = players.id) as matches from players left join matches
+        on (players.id = matches.winner or players.id = matches.loser) group by players.id order by wins desc;
+
 
 
